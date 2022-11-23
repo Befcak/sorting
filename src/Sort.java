@@ -1,5 +1,67 @@
-public class Sort {
-    public static int[] bubbleSort(int[] arr) {
+public class Sort implements Runnable{
+
+    private String temp;
+    private int[] arr;
+
+    public Sort(String temp, int[] arr) {
+        this.temp = temp;
+        this.arr = arr;
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
+    }
+
+    public int[] getArr() {
+        return arr;
+    }
+
+    public void setArr(int[] arr) {
+        this.arr = arr;
+    }
+
+    public void run(){
+        try {
+            long start = 0;
+            long end = 0;
+            if(this.temp == "bubble")
+            {
+                // printArray(arr, temp);
+                start = System.currentTimeMillis();
+                this.arr = bubbleSort(this.arr);
+                end = System.currentTimeMillis();
+                printResult(this.temp, this.arr, start, end);
+
+            }
+            if(this.temp == "insertion")
+            {
+                // printArray(this.arr, this.temp);
+                start = System.currentTimeMillis();
+                this.arr = insertionSort(this.arr);
+                end = System.currentTimeMillis();
+                printResult(this.temp, this.arr, start, end);
+            }
+            if(this.temp == "merge")
+            {
+                //printArray(arr, temp);
+                start = System.currentTimeMillis();
+                this.arr = mergeSort(this.arr);
+                end = System.currentTimeMillis();
+                printResult(this.temp, this.arr, start, end);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    private int[] bubbleSort(int[] arr) {
+        if(arr.length < 2)
+            return arr;
         int len = arr.length;
         int temp = 0;
         while (len != 0) {
@@ -15,7 +77,9 @@ public class Sort {
         return arr;
     }
 
-    public static int[] insertionSort(int[] arr) {
+    private static int[] insertionSort(int[] arr) {
+        if(arr.length < 2)
+            return arr;
         int temp = 0;
         int place = 0;
         for (int i = 0; i < arr.length - 1; i++) {
@@ -34,74 +98,72 @@ public class Sort {
                         break;
                 }
             }
-
             place++;
         }
+        return arr;
+    }
+
+    private static int[] mergeSort(int[] arr) {
+        
+        return arr;
+    }
+
+    private static int[] selectionSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] mergeSort(int[] arr) {
+    private static int[] quickSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] selectionSort(int[] arr) {
+    private static int[] heapSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] quickSort(int[] arr) {
+    private static int[] countingSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] heapSort(int[] arr) {
+    private static int[] radixSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] countingSort(int[] arr) {
+    private static int[] bucketSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] radixSort(int[] arr) {
+    private static int[] shellSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] bucketSort(int[] arr) {
+    private static int[] timSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] shellSort(int[] arr) {
+    private static int[] combSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] timSort(int[] arr) {
+    private static int[] pigeonholeSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] combSort(int[] arr) {
+    private static int[] cycleSort(int[] arr) {
 
         return arr;
     }
 
-    public static int[] pigeonholeSort(int[] arr) {
-
-        return arr;
-    }
-
-    public static int[] cycleSort(int[] arr) {
-
-        return arr;
-    }
-
-    public static boolean isSorted(int[] arr) {
+    private static boolean isSorted(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] > arr[i + 1])
                 return false;
@@ -109,11 +171,15 @@ public class Sort {
         return true;
     }
 
-    public static void printArray(int[] arr, String title) {
+    public void printArray(int[] arr, String title) {
         System.out.print(title + " : ");
         for (int i : arr) {
             System.out.print(i + " ");
         }
         System.out.println("");
+    }
+
+    private static void printResult(String temp, int[] arr, long start, long end){
+        System.out.println(temp + " sort: sorted=" + isSorted(arr) + ", time=" + (end - start) + " ms");
     }
 }
