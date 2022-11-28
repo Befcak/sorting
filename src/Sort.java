@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Sort implements Runnable{
 
     private String temp;
@@ -49,13 +51,13 @@ public class Sort implements Runnable{
             {
                 //printArray(arr, temp);
                 start = System.currentTimeMillis();
-                this.arr = mergeSort(this.arr);
+                this.arr = mergeSort(Arrays.copyOf(this.arr, this.arr.length));
                 end = System.currentTimeMillis();
                 printResult(this.temp, this.arr, start, end);
             }
 
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e.toString());
         }
     }
 
@@ -104,8 +106,14 @@ public class Sort implements Runnable{
     }
 
     private static int[] mergeSort(int[] arr) {
-        
-        return arr;
+        if(arr.length >= 2){
+            int mid = arr.length/2;
+            int[] leftArr = Arrays.copyOfRange(arr, 0, mid);
+            int[] rightArr = Arrays.copyOfRange(arr, mid, arr.length - 1);
+            return combineArrays(mergeSort(leftArr), mergeSort(rightArr));
+        }
+        else
+            return arr;
     }
 
     private static int[] selectionSort(int[] arr) {
@@ -181,5 +189,33 @@ public class Sort implements Runnable{
 
     private static void printResult(String temp, int[] arr, long start, long end){
         System.out.println(temp + " sort: sorted=" + isSorted(arr) + ", time=" + (end - start) + " ms");
+    }
+
+    private static int[] combineArrays(int[] a, int[] b){
+        int[] result = new int[(a.length + b.length)];
+        int i = 0, j = 0;
+
+        for(int k = 0; k < result.length; k++)
+        {
+            if(i >= a.length && j < b.length){
+                result[k] = b[j];
+                j++;
+            }
+            else if(j >= b.length && i < a.length){
+                result[k] = a[i];
+                i++;
+            }
+            else{
+                if(a[i] <= b[j]){
+                    result[k] = a[i];
+                    i++;
+                }
+                else{
+                    result[k] = b[j];
+                    j++;
+                }
+            }
+        }
+        return result;
     }
 }
