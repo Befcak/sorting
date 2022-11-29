@@ -51,7 +51,7 @@ public class Sort implements Runnable{
             {
                 //printArray(arr, temp);
                 start = System.currentTimeMillis();
-                this.arr = mergeSort(Arrays.copyOf(this.arr, this.arr.length));
+                this.arr = mergeSort(this.arr);
                 end = System.currentTimeMillis();
                 printResult(this.temp, this.arr, start, end);
             }
