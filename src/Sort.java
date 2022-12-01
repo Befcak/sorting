@@ -55,6 +55,14 @@ public class Sort implements Runnable{
                 end = System.currentTimeMillis();
                 printResult(this.temp, this.arr, start, end);
             }
+            if(this.temp == "selection")
+            {
+                //printArray(arr, temp);
+                start = System.currentTimeMillis();
+                this.arr = selectionSort(this.arr);
+                end = System.currentTimeMillis();
+                printResult(this.temp, this.arr, start, end);
+            }
 
         } catch (Exception e) {
             System.out.println("Exception: " + e.toString());
@@ -117,6 +125,19 @@ public class Sort implements Runnable{
     }
 
     private static int[] selectionSort(int[] arr) {
+        int lowest = -1;
+        for(int i = 0; i < arr.length; i++){
+            lowest = i;
+            for(int j = i; j < arr.length; j++){
+                if(arr[lowest] > arr[j])
+                    lowest = j;
+            }
+            if(lowest != i){
+                int temp = arr[i];
+                arr[i] = arr[lowest];
+                arr[lowest] = temp;
+            }
+        }
 
         return arr;
     }

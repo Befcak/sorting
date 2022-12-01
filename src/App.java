@@ -1,9 +1,10 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        int arrSize = 100000;
+        int arrSize = 1000000;
         int largestNum = 2000;
         int[] arr = NumberGenerator.generateArray(arrSize, largestNum);
-        String[] algos = {"bubble","insertion","merge"};
+        //String[] algos = {"selection"};
+        String[] algos = {"bubble","insertion","merge","selection"};
 
         for(String temp : algos)
         {
